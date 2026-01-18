@@ -1,0 +1,301 @@
+.custom-node {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border: 2px solid transparent;
+  border-radius: 12px;
+  min-width: 300px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.custom-node:hover {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(0, 0, 0, 0.06);
+  transform: translateY(-2px);
+}
+
+.custom-node.selected {
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.15), 0 8px 30px rgba(76, 175, 80, 0.2);
+  transform: translateY(-2px);
+}
+
+.node-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.06);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 249, 250, 0.9) 100%);
+  backdrop-filter: blur(10px);
+  border-radius: 12px 12px 0 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: #1a1a1a;
+  letter-spacing: 0.3px;
+}
+
+.node-header span {
+  flex: 1;
+}
+
+.node-delete-btn {
+  background: rgba(244, 67, 54, 0.08);
+  border: none;
+  color: #f44336;
+  cursor: pointer;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0.7;
+}
+
+.node-delete-btn:hover {
+  background: rgba(244, 67, 54, 0.15);
+  color: #d32f2f;
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.node-body {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: white;
+}
+
+.node-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.node-field label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #555;
+  letter-spacing: 0.2px;
+}
+
+.node-field input[type="text"],
+.node-field input[type="password"],
+.node-field input[type="number"],
+.node-field select,
+.node-field textarea {
+  padding: 10px 14px;
+  border: 2px solid #e8eaed;
+  border-radius: 8px;
+  font-size: 13px;
+  font-family: inherit;
+  width: 100%;
+  background: #fafbfc;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.node-field input:hover,
+.node-field select:hover,
+.node-field textarea:hover {
+  border-color: #d0d4d9;
+  background: white;
+}
+
+.node-field input:focus,
+.node-field select:focus,
+.node-field textarea:focus {
+  outline: none;
+  border-color: #4CAF50;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+}
+
+.node-field textarea {
+  resize: vertical;
+  min-height: 70px;
+  line-height: 1.5;
+}
+
+.upload-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.25);
+}
+
+.upload-btn:hover {
+  background: linear-gradient(135deg, #45a049 0%, #388e3c 100%);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.35);
+  transform: translateY(-1px);
+}
+
+.upload-btn:active {
+  transform: translateY(0);
+}
+
+.uploaded-file {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  font-size: 12px;
+  transition: all 0.2s;
+}
+
+.uploaded-file:hover {
+  background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+  border-color: #ced4da;
+}
+
+.uploaded-file button {
+  background: rgba(244, 67, 54, 0.1);
+  border: none;
+  color: #f44336;
+  cursor: pointer;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.uploaded-file button:hover {
+  background: rgba(244, 67, 54, 0.2);
+  transform: scale(1.1);
+}
+
+.prompt-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.prompt-tags span {
+  padding: 5px 12px;
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  border: 1px solid #90caf9;
+  border-radius: 16px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #1976d2;
+  letter-spacing: 0.2px;
+}
+
+.checkbox-field label {
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.checkbox-field input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.connection-point {
+  padding: 10px 14px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border: 2px dashed #ced4da;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6c757d;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.connection-point:hover {
+  border-color: #adb5bd;
+  background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+}
+
+.connection-point.output-point {
+  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+  border-color: #4CAF50;
+  border-style: solid;
+  color: #2e7d32;
+}
+
+.query-output {
+  padding: 8px 10px;
+  background: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 11px;
+  color: #666;
+}
+
+/* Node-specific colors with gradients */
+.user-query-node {
+  border-color: rgba(33, 150, 243, 0.2);
+}
+
+.user-query-node .node-header {
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  border-bottom-color: #90caf9;
+  color: #1565c0;
+}
+
+.user-query-node:hover {
+  border-color: rgba(33, 150, 243, 0.4);
+}
+
+.knowledge-base-node {
+  border-color: rgba(255, 152, 0, 0.2);
+}
+
+.knowledge-base-node .node-header {
+  background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+  border-bottom-color: #ffb74d;
+  color: #e65100;
+}
+
+.knowledge-base-node:hover {
+  border-color: rgba(255, 152, 0, 0.4);
+}
+
+.llm-engine-node {
+  border-color: rgba(156, 39, 176, 0.2);
+}
+
+.llm-engine-node .node-header {
+  background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+  border-bottom-color: #ce93d8;
+  color: #6a1b9a;
+}
+
+.llm-engine-node:hover {
+  border-color: rgba(156, 39, 176, 0.4);
+}
+
+.output-node {
+  border-color: rgba(76, 175, 80, 0.2);
+}
+
+.output-node .node-header {
+  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+  border-bottom-color: #81c784;
+  color: #2e7d32;
+}
+
+.output-node:hover {
+  border-color: rgba(76, 175, 80, 0.4);
+}
