@@ -6,7 +6,7 @@ alembic==1.12.1
 pydantic==2.5.0
 python-multipart==0.0.6
 pinecone==5.0.0
-supabase==2.3.4
+supabase==1.0.4
 google-generativeai==0.3.2
 PyMuPDF==1.24.0
 python-dotenv==1.0.0
