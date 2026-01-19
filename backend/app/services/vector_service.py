@@ -17,7 +17,7 @@ Usage:
     results = await vector_service.search_similar(query, n_results=5)
 """
 
-import pinecone
+from pinecone import Pinecone, ServerlessSpec
 from typing import List, Dict, Any, Optional
 import google.generativeai as genai
 from app.core.config import settings as app_settings
@@ -32,16 +32,15 @@ class VectorService:
         if not app_settings.GOOGLE_API_KEY:
             raise ValueError("GOOGLE_API_KEY is required")
         
-        # Initialize Pinecone (v2 API)
-        import pinecone
-        pinecone.init(api_key=app_settings.PINECONE_API_KEY, environment="us-east-1-aws")
+        # Initialize Pinecone
+        self.pc = Pinecone(api_key=app_settings.PINECONE_API_KEY)
         self.index_name = "genai-stack"
         
         # Create index if it doesn't exist
         self._ensure_index_exists()
         
         # Connect to index
-        self.index = pinecone.Index(self.index_name)
+        self.index = self.pc.Index(self.index_name)
         
         # Initialize Google Gemini
         genai.configure(api_key=app_settings.GOOGLE_API_KEY)
@@ -51,19 +50,31 @@ class VectorService:
     def _ensure_index_exists(self):
         """Create Pinecone index if it doesn't exist"""
         try:
-            import pinecone
-            existing_indexes = pinecone.list_indexes()
+            existing_indexes = [idx.name for idx in self.pc.list_indexes()]
             
             if self.index_name not in existing_indexes:
-                print(f"⚠️  Index {self.index_name} doesn't exist. Please create it manually in Pinecone dashboard as a serverless index.")
-                print(f"   Go to: https://app.pinecone.io/")
-                print(f"   Create index with name: {self.index_name}, dimension: 768, metric: cosine")
+                print(f"Creating Pinecone index: {self.index_name}")
+                self.pc.create_index(
+                    name=self.index_name,
+                    dimension=768,  # Gemini embedding-001 dimension
+                    metric="cosine",
+                    spec=ServerlessSpec(
+                        cloud="aws",
+                        region="us-east-1"
+                    )
+                )
+                
+                # Wait for index to be ready
+                print("Waiting for index to be ready...")
+                while not self.pc.describe_index(self.index_name).status['ready']:
+                    time.sleep(1)
+                print(f"✅ Index {self.index_name} created and ready")
             else:
                 print(f"✅ Using existing index: {self.index_name}")
                 
         except Exception as e:
-            print(f"⚠️  Error checking index: {e}")
-            print(f"   Assuming index exists and continuing...")
+            print(f"⚠️  Error ensuring index exists: {e}")
+            raise
 
     async def create_embeddings(self, texts: List[str]) -> List[List[float]]:
         """Create embeddings using Google Gemini"""
